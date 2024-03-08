@@ -14,7 +14,7 @@
 ## 기능 구현 목록
 ### Article
 - [x] id, title, content, writer, password, createdAt, updatedAt
-- [] 작성하기(Create)
+- [x] 작성하기(Create)
 - [x] 조회하기(Retrieve)
   - [x] id로 조회하기
   - [x] title로 조회하기
