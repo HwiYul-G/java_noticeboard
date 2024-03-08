@@ -49,12 +49,17 @@ viewResolver가 templates의 hello-template.html이란 view를 찾아주고 현�
 
 ### API
 ```Java
-@GetMapping("hello-string")
-@ResponseBody // http의 body부에 retun하는 데이터를 직접 넣어준다.
-public String helloString(@RequestParam("name") String name){
-    return "hello" + name; // 이 데이터를 그대로 내려줌
+public class HelloController {
+    // ...
+    @GetMapping("hello-string")
+    @ResponseBody // http의 body부에 retun하는 데이터를 직접 넣어준다.
+    public String helloString(@RequestParam("name") String name) {
+        return "hello" + name; // 이 데이터를 그대로 내려줌
+    }
+    // ...
 }
 ```
+
 ```Java
 public class HelloController {
     @GetMapping("hello-api")
@@ -81,6 +86,27 @@ helloController에서 해당 요청을 담당하는 메소드는 `@ResponseBody`
 - byte 처리 등 기타 여러 HttpMessageConverter들이 등록되어 있다.
   클라이언트의 HTTP ACCEPT 헤더와 서버의 컨트롤러 반환 타입 정보 두 개를 조합해서 HttpMessageConverter가 선택된다.
 
+## web application's structure
+
+---
+### layer strucutre
+
+![img](./resources/webapp-layer-strucutre.png)
+<b>A -> B : A가 B를 알고 있다. = B는 A에 주입된다.</b>
+#### 역할
+- controller : web mvc's controller로 request를 적절한 응답에 매칭시킨다.
+- service : 핵심 비즈니스 로직을 구현한다.
+- repository : 데이터베이스에 접근한다. 도메인 객체를 데이터베이스에 저장하고 관리한다.
+- domain : 비즈니스 도메인 객체 (ex. 회원, 게시글, 댓글 등)로 DB에 저장하고 관리된다.
+
+### Dependency Injection, DI
+![img](./resources/di.png)
+A -> B는 A가 B에 의존한다. = A는 B를 알고 있다. = B는 A에 주입된다.<br>
+- 특정 서비스는 자신의 담당 레포지토리에 의존한다.
+- 그 의존 내용은 모른 채 인터페이스를 주입받는다.
+- 이로써 약한 결합을 이룰 수 있다.
+- 특정 레포지토리르 구체적으로 구현한 구현체가 있다.
+- 현재는 DB 선택 없이 가벼운 메모리 기반 데이터 저장소에 저장한다. 앞으로 선택한다.
 
 ## 참고자료
 
