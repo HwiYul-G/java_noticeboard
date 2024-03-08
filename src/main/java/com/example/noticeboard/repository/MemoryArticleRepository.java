@@ -43,6 +43,7 @@ public class MemoryArticleRepository implements ArticleRepository{
                 .findAny();
     }
 
+    // TODO : 24-03-08이 들어오면 이것이 일치하는 것만 검색하고 싶어.
     @Override
     public Optional<Article> findByCreatedAt(LocalDateTime createdAt) {
         return store.values().stream()
@@ -53,5 +54,9 @@ public class MemoryArticleRepository implements ArticleRepository{
     @Override
     public List<Article> findAll() {
         return new ArrayList<>(store.values());
+    }
+
+    public void clearStore() {
+        store.clear();
     }
 }
