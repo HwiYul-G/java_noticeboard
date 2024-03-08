@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -74,12 +75,21 @@ class MemoryArticleRepositoryTest {
 
     @Test
     void findByCreatedAt_true(){
-        int expected = 3;
+        int expected = 1;
 
-        LocalDate today = LocalDate.now();
+        Article article = new Article();
+        article.setTitle("테스트제목");
+        article.setContent("테스트 콘텐츠");
+        article.setPassword("비밀번호");
+        article.setWriter("작성자");
 
-        int result = repository.findByCreatedAt(today).size();
-        Assertions.assertThat(result).isEqualTo(result);
+        Article savedArticle = repository.save(article);
+        savedArticle.setCreatedAt(LocalDateTime.of(2023,3,8,11,11,11));
+
+        LocalDate findDate = LocalDate.of(2023,3,8);
+        int result = repository.findByCreatedAt(findDate).size();
+
+        Assertions.assertThat(result).isEqualTo(expected);
     }
 
     @Test

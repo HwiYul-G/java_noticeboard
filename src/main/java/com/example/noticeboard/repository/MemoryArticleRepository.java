@@ -45,7 +45,6 @@ public class MemoryArticleRepository implements ArticleRepository{
                 .toList();
     }
 
-    // TODO : 24-03-08이 들어오면 이것이 일치하는 것만 검색하고 싶어.
     @Override
     public List<Article> findByCreatedAt(LocalDate createdAt) {
         return store.values().stream()
