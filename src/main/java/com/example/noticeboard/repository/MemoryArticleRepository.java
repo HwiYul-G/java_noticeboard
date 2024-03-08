@@ -17,6 +17,9 @@ public class MemoryArticleRepository implements ArticleRepository{
     @Override
     public Article save(Article article) {
         article.setId(++sequence);
+        LocalDateTime now = LocalDateTime.now();
+        article.setCreatedAt(now);
+        article.setUpdatedAt(now);
         store.put(article.getId(), article);
         return article;
     }
