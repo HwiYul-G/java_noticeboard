@@ -111,6 +111,38 @@ A -> B는 A가 B에 의존한다. = A는 B를 알고 있다. = B는 A에 주입�
 - Repository는 save, findById, findByTitle, findAll 같이 DB에 더 가까운 이름이 붙고
 - Service는 create무언가, findOne, findOneByTitle, find무언가s 같이 비즈니스에 가까운 이름이 붙는다.
 
+### 컴포넌트 등록, 컴포넌트 스캔으로 자동 의존 관계 설정
+
+```Java
+@Controller
+public class FooController{
+  //...
+  private final FooService fooService;
+  
+  @Autowired
+  public FooController(FooService fooService){
+  }
+}
+```
+- 스프링이 실행되면 그 안에 스프링 컨테이너가 생성된다.
+- `@Controller` 어노테이션을 클래스에 붙인 순간, 스프링 컨테이너에 컨트롤러 객체가 생성되어 넣어진다.
+- 스프링이 컨트롤러들을 관리한다.
+- `@Controller`, `@Repository`, `@Service` 모두 `@Component`의 일부이다.
+- `@Component`를 붙이면 스프링 빈으로 등록된다. 스프링 빈으로 등록되면 스프링 실행 시 스프링 컨테이너에 컨트롤러 객체가 생성되어 넣고 관리된다는 것을 의미한다.
+<p>
+마찬가지로, @Repository, @Service를 붙여주어야한다.<br>
+그렇게 하면 스프링 컨테이너에 컨트롤러, 레포지토리, 서비스 어노테이션이 붙은 각 객체가 스프링 컨테이너에 등록된다.<br>
+그것을 기반으로 컴포넌트 스캔을 하고 @Autowired된 경우 자동 의존 관계를 설정한다.
+</p>
+<p>
+스프링 빈으로 등록되는 것은 현재 패키지의 Main인 @SpringBootApplication이 붙은 패키지의 하위 패키지들을 스캔한다.
+</p>
+<p>
+스프링은 스프링 컨테이너에 스프링 빈을 등록할 때, 기본으로 싱글톤으로 등록한다.<br>
+유일하게 하나만 등록해서 공유한다.<br>
+따라서 같은 스프링 빈이면 모두 같은 인스턴스다. 설정으로 싱글톤이 아니게 설정할 수 있지만, 특별한 경우를 제외하면 대부분 싱글톤을 사용한다.
+설정으로 싱글톤이 아니게 할 수도 있다.
+</p>
 ## 참고자료
 
 ---
