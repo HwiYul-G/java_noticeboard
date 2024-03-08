@@ -15,12 +15,12 @@
 ### Article
 - [x] id, title, content, writer, password, createdAt, updatedAt
 - [] 작성하기(Create)
-- [] 조회하기(Retrieve)
-  - [] id로 조회하기
-  - [] title로 조회하기
-  - [] writer로 조회하기
-  - [] 전체 조회하기
-  - [] 게시된 날짜로 조회하기
+- [x] 조회하기(Retrieve)
+  - [x] id로 조회하기
+  - [x] title로 조회하기
+  - [x] writer로 조회하기
+  - [x] 전체 조회하기
+  - [x] 게시된 날짜로 조회하기
 - [] 수정하기(Update)
 - [] 삭제하기(Delete)
 
