@@ -6,6 +6,8 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -29,6 +31,13 @@ class MemoryArticleRepositoryTest {
         article2.setPassword("비밀번호2");
         article2.setWriter("작성자2");
         repository.save(article2);
+
+        Article article3 = new Article();
+        article3.setTitle("제목3");
+        article3.setContent("컨텐츠3");
+        article3.setPassword("비밀번호2");
+        article3.setWriter("작성자2");
+        repository.save(article3);
     }
 
     @AfterEach
@@ -57,19 +66,25 @@ class MemoryArticleRepositoryTest {
     }
 
     @Test
-    void whenFindExistingArticle_findByWriter_isNotEmpty(){
-        Optional<Article> result = repository.findByWriter("작성자2");
-        Assertions.assertThat(result).isNotEmpty();
+    void whenFindArticles_findByWriter_sizeIsTwo(){
+        int expectedSize = 2;
+        List<Article> result = repository.findByWriter("작성자2");
+        Assertions.assertThat(result.size()).isEqualTo(expectedSize);
     }
 
     @Test
     void findByCreatedAt_true(){
-        // TODO : 24-03-08이 들어오면 이것이 일치하는 것만 검색하고 싶어.
+        int expected = 3;
+
+        LocalDate today = LocalDate.now();
+
+        int result = repository.findByCreatedAt(today).size();
+        Assertions.assertThat(result).isEqualTo(result);
     }
 
     @Test
     void findAll_true(){
-        int expectedSize = 2;
+        int expectedSize = 3;
         int size = repository.findAll().size();
         Assertions.assertThat(size).isEqualTo(expectedSize);
     }
