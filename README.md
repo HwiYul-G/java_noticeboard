@@ -12,5 +12,11 @@
 
 
 ## 기능 구현 목록
+### Article
+- [] id, title, content, writer, password, createdAt, updatedAt
+- [] 작성하기(Create)
+- [] 조회하기(Retrieve)
+- [] 수정하기(Update)
+- [] 삭제하기(Delete)
 
 ---
