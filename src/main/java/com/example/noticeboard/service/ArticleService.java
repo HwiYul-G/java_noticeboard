@@ -2,16 +2,20 @@ package com.example.noticeboard.service;
 
 import com.example.noticeboard.domain.Article;
 import com.example.noticeboard.repository.ArticleRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class ArticleService {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private final ArticleRepository articleRepository;
 
+    @Autowired
     public ArticleService(ArticleRepository articleRepository){
         this.articleRepository = articleRepository;
     }
