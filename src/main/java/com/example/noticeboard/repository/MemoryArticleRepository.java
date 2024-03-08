@@ -2,12 +2,14 @@ package com.example.noticeboard.repository;
 
 import com.example.noticeboard.domain.Article;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 public class MemoryArticleRepository implements ArticleRepository{
     // 공유되는 동시성 문제 때문에 HashMap이 아니라 ConcurrenthashMap을 사용한다.
@@ -37,18 +39,18 @@ public class MemoryArticleRepository implements ArticleRepository{
     }
 
     @Override
-    public Optional<Article> findByWriter(String writer) {
+    public List<Article> findByWriter(String writer) {
         return store.values().stream()
                 .filter(article -> article.getWriter().equals(writer))
-                .findAny();
+                .toList();
     }
 
     // TODO : 24-03-08이 들어오면 이것이 일치하는 것만 검색하고 싶어.
     @Override
-    public Optional<Article> findByCreatedAt(LocalDateTime createdAt) {
+    public List<Article> findByCreatedAt(LocalDate createdAt) {
         return store.values().stream()
-                .filter(article -> article.getCreatedAt().equals(createdAt))
-                .findAny();
+                .filter(article -> article.getCreatedAt().toLocalDate().equals(createdAt))
+                .collect(Collectors.toList());
     }
 
     @Override
