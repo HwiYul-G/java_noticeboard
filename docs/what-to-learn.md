@@ -143,6 +143,54 @@ public class FooController{
 따라서 같은 스프링 빈이면 모두 같은 인스턴스다. 설정으로 싱글톤이 아니게 설정할 수 있지만, 특별한 경우를 제외하면 대부분 싱글톤을 사용한다.
 설정으로 싱글톤이 아니게 할 수도 있다.
 </p>
+
+### 자바 코드로 직접 스프링 빈 등록
+- article service와 article repository의 @Service, @Repository, @Autowired 어노테이션을 제거한다.
+```
+@Configuration
+public class SpringConfig {
+
+  @Bean
+  public ArticleService articleService(){
+    return new ArticleService(articleRepository); // repository(interface)를 주입해야해
+  }
+  
+  @Bean
+  public ArticleRepository articleRepository(){
+    return new MemoryArticleRepository(); // 구현체를 넣어야해
+  }
+  
+}
+```
+- 정형화된 컨트롤러, 서비스, 레포지토리같은 코드는 컴포넌트 스캔 활용.
+- 정형화되지 않거나, 상황에 따라 구현 클래스를 변경할 땐 설정을 통해 스프링 빈으로 등록.
+
+
+#### DI 방법
+- 생성자 주입 [권장] : 의존 관계가 실행 중 동적으로 변화는 경우는 거의 없으므로
+- 필드 주입 
+```
+@Controller
+public class FooController {
+  @Autowired private FooService fooService; // 필드 주입
+}
+```
+- 세터 주입
+```
+@Controller
+public class FooController{
+  private FooService fooService;
+  @Autowired
+  public void setFooService(FooService fooService){
+    this.fooService = fooService;
+  }
+}
+```
+
+
+
+
+
 ## 참고자료
 
 ---
