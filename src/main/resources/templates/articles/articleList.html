@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>자유 게시판</title>
+</head>
+<body>
+    <div class="container">
+        <div>
+            <table>
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>게시 날짜</th>
+                    <th>보기</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="article : ${articles}">
+                    <td th:text="${article.id}"></td>
+                    <td th:text="${article.title}"></td>
+                    <td th:text="${article.writer}"></td>
+                    <td th:text="${article.createdAt}"></td>
+                    <td><button><a th:href="@{'articles/'+${article.id}}">보기</a></button></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+    </div>
+
+</body>
+</html>
