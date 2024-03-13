@@ -4,6 +4,8 @@ import com.example.noticeboard.domain.Article;
 import jakarta.persistence.EntityManager;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,6 +19,9 @@ public class JpaArticleRepository implements ArticleRepository {
 
     @Override
     public Article save(Article article) {
+        LocalDateTime now = LocalDateTime.now();
+        article.setCreatedAt(now);
+        article.setUpdatedAt(now);
         em.persist(article);
         return article;
     }
@@ -44,8 +49,11 @@ public class JpaArticleRepository implements ArticleRepository {
 
     @Override
     public List<Article> findByCreatedAt(LocalDate createdAt) {
-        return em.createQuery("select a from Article as a where a.createdAt = :createdAt", Article.class)
-                .setParameter("createdAt", createdAt)
+        LocalDateTime startOfDay = createdAt.atStartOfDay();
+        LocalDateTime endOfDay = createdAt.atTime(LocalTime.MAX);
+        return em.createQuery("select a from Article as a where a.createdAt >= :startOfDay and a.createdAt <= :endOfDay", Article.class)
+                .setParameter("startOfDay", startOfDay)
+                .setParameter("endOfDay", endOfDay)
                 .getResultList();
     }
 
