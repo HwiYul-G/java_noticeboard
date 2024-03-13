@@ -12,15 +12,17 @@ import javax.sql.DataSource;
 
 @Configuration
 public class SpringConfig {
-    private EntityManager em;
+
+    private final ArticleRepository articleRepository;
 
     @Autowired
-    public SpringConfig(EntityManager em){
-        this.em = em;
+    public SpringConfig(ArticleRepository articleRepository){
+        this.articleRepository = articleRepository;
     }
 
-    @Bean
-    public ArticleRepository articleRepository(){
-        return new JpaArticleRepository(em);
-    }
+//    @Bean
+//    public ArticleRepository articleRepository(){
+////        return new JpaArticleRepository(em);
+//        return new
+//    }
 }
