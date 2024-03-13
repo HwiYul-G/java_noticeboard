@@ -13,4 +13,6 @@ public interface ArticleRepository {
     List<Article> findByWriter(String writer);
     List<Article> findByCreatedAt(LocalDate createdAt);
     List<Article> findAll();
+
+    void deleteById(Long id);
 }

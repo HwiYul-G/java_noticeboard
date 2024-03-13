@@ -17,7 +17,7 @@ class MemoryArticleRepositoryTest {
     MemoryArticleRepository repository = new MemoryArticleRepository();
 
     @BeforeEach
-    private void before(){
+    private void beforeEach(){
         Article article1 = new Article();
         article1.setTitle("제목1");
         article1.setContent("컨텐츠1");
@@ -97,6 +97,25 @@ class MemoryArticleRepositoryTest {
         int expectedSize = 3;
         int size = repository.findAll().size();
         Assertions.assertThat(size).isEqualTo(expectedSize);
+    }
+
+    @Test
+    void deleteById_createArticleAndDeleteById_totalSizeIsThree(){
+        int expected = 3;
+
+        Article article = new Article();
+        article.setTitle("타이틀");
+        article.setContent("컨텐츠");
+        article.setPassword("12345");
+        article.setWriter("작성자");
+        repository.save(article);
+
+        Long id = repository.findByTitle("타이틀").get().getId();
+        repository.deleteById(id);
+
+        int result = repository.findAll().size();
+        Assertions.assertThat(result).isEqualTo(expected);
+
     }
 
 
