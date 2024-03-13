@@ -1,5 +1,6 @@
 package com.example.noticeboard;
 
+import com.example.noticeboard.aop.TimeTraceAop;
 import com.example.noticeboard.repository.ArticleRepository;
 import com.example.noticeboard.repository.JdbcTemplateArticleRepository;
 import com.example.noticeboard.repository.JpaArticleRepository;
@@ -25,4 +26,9 @@ public class SpringConfig {
 ////        return new JpaArticleRepository(em);
 //        return new
 //    }
+
+    @Bean
+    public TimeTraceAop timeTraceAop(){
+        return new TimeTraceAop();
+    }
 }
