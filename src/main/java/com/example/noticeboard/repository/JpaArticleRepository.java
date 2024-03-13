@@ -61,4 +61,10 @@ public class JpaArticleRepository implements ArticleRepository {
     public List<Article> findAll() {
         return em.createQuery("select a from Article as a", Article.class).getResultList();
     }
+
+    @Override
+    public void deleteById(Long id) {
+        em.createQuery("delete from Article as a where a.id = :id")
+                .setParameter("id", id);
+    }
 }

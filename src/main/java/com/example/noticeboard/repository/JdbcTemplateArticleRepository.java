@@ -72,6 +72,11 @@ public class JdbcTemplateArticleRepository implements ArticleRepository {
         return jdbcTemplate.query("select * from article", articleRowMapper());
     }
 
+    @Override
+    public void deleteById(Long id) {
+        jdbcTemplate.update("delete from article where id = ?", id);
+    }
+
     private RowMapper<Article> articleRowMapper(){
         return new RowMapper<Article>() {
             @Override
