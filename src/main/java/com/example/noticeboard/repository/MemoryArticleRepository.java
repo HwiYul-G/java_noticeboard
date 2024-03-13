@@ -12,7 +12,7 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-@Repository
+
 public class MemoryArticleRepository implements ArticleRepository{
     // 공유되는 동시성 문제 때문에 HashMap이 아니라 ConcurrenthashMap을 사용한다.
     private static Map<Long, Article> store = new ConcurrentHashMap<>();
