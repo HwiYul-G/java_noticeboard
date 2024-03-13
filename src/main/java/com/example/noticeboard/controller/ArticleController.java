@@ -29,6 +29,7 @@ public class ArticleController {
     public String create(ArticleForm form) {
         Article article = new Article();
         article.setTitle(form.title());
+        article.setPassword(form.password());
         article.setWriter(form.writer());
         article.setContent(form.content());
 
