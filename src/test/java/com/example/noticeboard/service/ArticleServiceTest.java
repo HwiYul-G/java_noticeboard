@@ -117,4 +117,17 @@ class ArticleServiceTest {
         Assertions.assertThat(result).isEqualTo(expected);
     }
 
+    @Test
+    void deleteArticle_deleteOneAfterCreateOne_isEmpty(){
+        Article article = new Article();
+        article.setTitle("테스트제목");
+        article.setWriter("테스트저자");
+        article.setPassword("테스트비번");
+        article.setContent("테스트컨텐츠");
+        Long id = articleService.createArticle(article);
+
+        articleService.deleteArticle(id);
+        Assertions.assertThat(articleService.findOne(id)).isEmpty();
+    }
+
 }
