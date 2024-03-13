@@ -1,9 +1,6 @@
 package com.example.noticeboard.domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDateTime;
 
@@ -15,7 +12,9 @@ public class Article {
     private String content;
     private String writer;
     private String password;
+    @Column(name="createdat")
     private LocalDateTime createdAt;
+    @Column(name="updatedat")
     private LocalDateTime updatedAt;
 
     public Long getId() {
