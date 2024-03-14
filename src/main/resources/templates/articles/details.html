@@ -13,8 +13,21 @@
     <p th:text="${article.content}">
     </p>
 
-    <button><a href="#">수정</a></button>
-    <button><a href="#">삭제</a></button>
+    <form th:action="|/articles/update/${article.id}|" method="post">
+        <div>
+            <label for="password_for_update">수정 비밀번호: </label>
+            <input type="password" id="password_for_update" name="password">
+        </div>
+        <button type="submit">수정</button>
+    </form>
+
+    <form th:action="|/articles/delete/${id}|" method="post">
+        <div>
+            <label for="password_for_delete">삭제 비밀번호: </label>
+            <input type="password" id="password_for_delete" name="password">
+        </div>
+        <button type="submit">삭제</button>
+    </form>
 <!--    https://github.com/sinam7/Bulletin-Board/blob/master/src/main/resources/templates/article/articleView.html#L34-->
 </body>
 </html>
