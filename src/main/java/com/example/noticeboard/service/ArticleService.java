@@ -11,13 +11,14 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Optional;
 
-@Service @Transactional
+@Service
+@Transactional
 public class ArticleService {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     private final ArticleRepository articleRepository;
 
     @Autowired
-    public ArticleService(ArticleRepository articleRepository){
+    public ArticleService(ArticleRepository articleRepository) {
         this.articleRepository = articleRepository;
     }
 
@@ -27,7 +28,7 @@ public class ArticleService {
         return article.getId();
     }
 
-    private void validateDuplicateTitle(Article article){
+    private void validateDuplicateTitle(Article article) {
         // Optional<>이 보이는 게 좋지 않아서 한줄로 변경
         articleRepository.findByTitle(article.getTitle())
                 .ifPresent(a -> {
@@ -35,30 +36,39 @@ public class ArticleService {
                 });
     }
 
-    public List<Article> findArticles(){
+    public List<Article> findArticles() {
         return articleRepository.findAll();
     }
 
-    public Optional<Article> findOne(Long articleId){
+    public Optional<Article> findOne(Long articleId) {
         return articleRepository.findById(articleId);
     }
 
-    public Optional<Article> findOne(String title){
+    public Optional<Article> findOne(String title) {
         return articleRepository.findByTitle(title);
     }
 
-    public List<Article> findArticlesByWriter(String writer){
+    public List<Article> findArticlesByWriter(String writer) {
         return articleRepository.findByWriter(writer);
     }
 
-    public List<Article> findArticlesByDate(String date){
+    public List<Article> findArticlesByDate(String date) {
         LocalDate localDateTime = parseStringToLocalDateTime(date);
         return articleRepository.findByCreatedAt(localDateTime);
     }
 
-    private LocalDate parseStringToLocalDateTime(String date){
+    private LocalDate parseStringToLocalDateTime(String date) {
         return LocalDate.parse(date, formatter);
     }
 
+
+    public void deleteArticle(Long id) {
+        articleRepository.deleteById(id);
+    }
+
+    public boolean validatePassword(Long id, String password) {
+        Optional<Article> article = articleRepository.findById(id);
+        return article.isPresent() && article.get().getPassword().equals(password);
+    }
 
 }
