@@ -5,12 +5,10 @@ import com.example.noticeboard.service.ArticleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ArticleController {
@@ -54,5 +52,23 @@ public class ArticleController {
     }
 
 
+    @PutMapping("/articles/{id}")
+    public String update(@PathVariable Long id, String password){
+        // TODO : update 관련 로직
+        if(articleService.validatePassword(id, password)) {
+            return "/articles/update/{id}"; // TODO : 이 링크에 들어가서 변경 사항을 save한다.
+        }
+        return "/articles/{id}";
+    }
+
+    @DeleteMapping("/articles/{id}")
+    public String delete(@PathVariable Long id, String password){
+        boolean result = articleService.validatePassword(id, password);
+        if(result){
+            articleService.deleteArticle(id);
+            return "/articles";
+        }
+        return "/articles/{id}";
+    }
 
 }
