@@ -52,7 +52,7 @@ public class ArticleController {
     }
 
 
-    @PostMapping("/articles/update/{id}")
+    @PostMapping("/articles/validatePassword/{id}")
     public String update(@PathVariable Long id, String password, Model model){
         if(articleService.validatePassword(id, password)) {
             Article article = articleService.findOne(id).get();
@@ -62,7 +62,7 @@ public class ArticleController {
         return "redirect:/articles/{id}";
     }
 
-    @PostMapping("/articles/update/_/{id}")
+    @PostMapping("/articles/update/{id}")
     public String _update(@PathVariable Long id, ArticleForm form){
         Article article = new Article();
         article.setId(id);

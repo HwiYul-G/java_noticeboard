@@ -5,7 +5,7 @@
     <title>새 게시글 작성</title>
 </head>
 <body>
-    <form th:action="|/articles/update/_/${article.id}|" method="post">
+    <form th:action="|/articles/update/${article.id}|" method="post">
         <div>
             <input type="hidden" id="id" name="id" th:text="${article.id}">
             <label for="title">제목</label>
