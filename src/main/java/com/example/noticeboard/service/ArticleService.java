@@ -71,4 +71,14 @@ public class ArticleService {
         return article.isPresent() && article.get().getPassword().equals(password);
     }
 
+    public Long updateArticle(Long id, Article updatedArticle){
+        Article article = articleRepository.findById(id).get();
+        article.setTitle(updatedArticle.getTitle());
+        article.setPassword(updatedArticle.getPassword());
+        article.setWriter(updatedArticle.getWriter());
+        article.setContent(updatedArticle.getContent());
+        articleRepository.save(article);
+        return id;
+    }
+
 }
