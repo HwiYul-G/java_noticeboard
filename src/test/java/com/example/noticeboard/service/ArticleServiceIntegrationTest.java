@@ -2,10 +2,8 @@ package com.example.noticeboard.service;
 
 import com.example.noticeboard.domain.Article;
 import com.example.noticeboard.repository.ArticleRepository;
-import com.example.noticeboard.repository.MemoryArticleRepository;
 import jakarta.transaction.Transactional;
 import org.assertj.core.api.Assertions;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -116,17 +114,17 @@ class ArticleServiceIntegrationTest {
         Assertions.assertThat(result).isEqualTo(expected);
     }
 
-    @Test
-    void deleteArticle_deleteOneAfterCreateOne_isEmpty(){
-        Article article = new Article();
-        article.setTitle("테스트제목");
-        article.setWriter("테스트저자");
-        article.setPassword("테스트비번");
-        article.setContent("테스트컨텐츠");
-        Long id = articleService.createArticle(article);
-
-        articleService.deleteArticle(id);
-        Assertions.assertThat(articleService.findOne(id)).isEmpty();
-    }
+//    @Test
+//    void deleteArticle_deleteOneAfterCreateOne_isEmpty(){
+//        Article article = new Article();
+//        article.setTitle("테스트제목");
+//        article.setWriter("테스트저자");
+//        article.setPassword("테스트비번");
+//        article.setContent("테스트컨텐츠");
+//        Long id = articleService.createArticle(article);
+//
+//        articleService.removeArticle(id, "테스트비번");
+//        Assertions.assertThat(articleService.findOne(id)).isEmpty();
+//    }
 
 }

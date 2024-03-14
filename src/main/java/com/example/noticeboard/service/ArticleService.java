@@ -60,8 +60,5 @@ public class ArticleService {
         return LocalDate.parse(date, formatter);
     }
 
-    public void deleteArticle(Long id){
-        articleRepository.deleteById(id);
-    }
 
 }
