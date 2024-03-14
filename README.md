@@ -25,6 +25,25 @@
     - 부적절한 게시글 관리를 위해 DB에는 정확한 게시 날짜를 보관할 필요가 있음.
     - 하지만 검색할 때는 시간을 조회하는 게 적절하지 못함.
 - [] 수정하기(Update)
+  - 비밀번호가 맞으면 수정가능
 - [] 삭제하기(Delete)
+  - 비밀번호가 맞으면 삭제한다.
+
+### Comment
+- [] id, writer, content, password, createdAt, article_id
+- [] 작성하기(Create)
+- [] 조회하기(Retrieve)
+  - [] 특정 article에 관해 항상 조회됨
+- [] 삭제하기(Delete)
+  - 비밀번호가 맞으면 삭제한다.
+
+### Member
+- [] id, email, password, userName, birthday, phone, createdAt
+- [] 가입하기(Create)
+- [] 회원정보 변경하기(Update)
+- [] 탈퇴하기(Delete)
+
+### MemberArticle
+
 
 ---
