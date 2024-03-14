@@ -52,23 +52,36 @@ public class ArticleController {
     }
 
 
-    @PutMapping("/articles/{id}")
-    public String update(@PathVariable Long id, String password){
-        // TODO : update 관련 로직
+    @PostMapping("/articles/update/{id}")
+    public String update(@PathVariable Long id, String password, Model model){
         if(articleService.validatePassword(id, password)) {
-            return "/articles/update/{id}"; // TODO : 이 링크에 들어가서 변경 사항을 save한다.
+            Article article = articleService.findOne(id).get();
+            model.addAttribute("article", article);
+            return "/articles/updateArticleForm";
         }
-        return "/articles/{id}";
+        return "redirect:/articles/{id}";
     }
 
-    @DeleteMapping("/articles/{id}")
+    @PostMapping("/articles/update/_/{id}")
+    public String _update(@PathVariable Long id, ArticleForm form){
+        Article article = new Article();
+        article.setId(id);
+        article.setTitle(form.title());
+        article.setPassword(form.password());
+        article.setWriter(form.writer());
+        article.setContent(form.content());
+        articleService.updateArticle(id, article);
+        return "redirect:/articles/{id}";
+    }
+
+    @PostMapping("/articles/delete/{id}")
     public String delete(@PathVariable Long id, String password){
         boolean result = articleService.validatePassword(id, password);
         if(result){
             articleService.deleteArticle(id);
-            return "/articles";
+            return "redirect:/articles";
         }
-        return "/articles/{id}";
+        return "redirect:/articles/{id}";
     }
 
 }
