@@ -38,7 +38,7 @@
   - 비밀번호가 맞으면 삭제한다.
 
 ### Member
-- [] id, email, password, userName, birthday, phone, createdAt
+- [x] id, email, password, userName, birthday, phone, createdAt
 - [] 가입하기(Create)
 - [] 회원정보 변경하기(Update)
 - [] 탈퇴하기(Delete)
