@@ -48,4 +48,12 @@ public class Article {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+    public void patch(Article article){
+        this.title = article.title;
+        this.writer = article.writer;
+        this.content = article.content;
+        this.password = article.password;
+        this.updatedAt = LocalDateTime.now();
+    }
 }
