@@ -73,11 +73,7 @@ public class ArticleService {
 
     public Long updateArticle(Long id, Article updatedArticle){
         Article article = articleRepository.findById(id).get();
-        article.setTitle(updatedArticle.getTitle());
-        article.setPassword(updatedArticle.getPassword());
-        article.setWriter(updatedArticle.getWriter());
-        article.setContent(updatedArticle.getContent());
-        articleRepository.save(article);
+        article.patch(updatedArticle);
         return id;
     }
 
