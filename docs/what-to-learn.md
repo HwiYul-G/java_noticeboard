@@ -187,7 +187,15 @@ public class FooController{
 }
 ```
 
-
+## Form, DTO
+- ArticleForm 같이 외부에서 form으로 들어오는 것은 toEntity() 가 존재한다.
+- CommentDTO 같이 내부에서 외부로 나가는 것은 Entity(Comment)를 받아서 dto가 직접 static 메소드로 생성한다. 예를 들면, createCommentDTO(Comment comment)이다.
+- Entity의 업데이트는 자기 스스로 한다. `patch(Entity e)` 혹음 `patch(DTO dto)`
+- DTO로 내부에서 외부로 나가는 게 있는 경우 Entity를 만들 때, createEntity라는 것을 Entity 자신이 static 메서드로 가지고 있다.
+<br>
+- form은 외부에서 내부로 들어온다. 데이터 유효성 검사 + toEntity()
+- DTO는 내부에서 외부로 나간다. createDTO(Entity e)
+- DTO관련 Entity에는 createEntity(DTO dto)가 있다.
 
 
 
@@ -195,3 +203,4 @@ public class FooController{
 
 ---
 - 인프런의 김영한 선생님의 "스프링 입문 - 코드로 배우는 스프링 부트, 웹 MVC, DB 접근 기술"
+- 길벗 출판사의 코딩 자율학습 스프링 부트3 자바 백엔드 개발 입문 도서 : https://github.com/gilbutITbook/080354
