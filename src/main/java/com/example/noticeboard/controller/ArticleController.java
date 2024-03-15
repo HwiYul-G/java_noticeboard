@@ -26,14 +26,7 @@ public class ArticleController {
 
     @PostMapping("/articles/new")
     public String create(ArticleForm form) {
-        Article article = new Article();
-        article.setTitle(form.title());
-        article.setPassword(form.password());
-        article.setWriter(form.writer());
-        article.setContent(form.content());
-
-        articleService.createArticle(article);
-
+        articleService.createArticle(form.toEntity());
         return "redirect:/";
     }
 
@@ -64,13 +57,7 @@ public class ArticleController {
 
     @PostMapping("/articles/update/{id}")
     public String _update(@PathVariable Long id, ArticleForm form){
-        Article article = new Article();
-        article.setId(id);
-        article.setTitle(form.title());
-        article.setPassword(form.password());
-        article.setWriter(form.writer());
-        article.setContent(form.content());
-        articleService.updateArticle(id, article);
+        articleService.updateArticle(id, form.toEntity());
         return "redirect:/articles/{id}";
     }
 

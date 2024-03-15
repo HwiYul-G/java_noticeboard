@@ -21,6 +21,14 @@ public class Article {
     public Article(){
     }
 
+    public Article(String title, String content, String writer, String password) {
+        this.title = title;
+        this.content = content;
+        this.writer = writer;
+        this.password = password;
+        this.createdAt = this.updatedAt = LocalDateTime.now();
+    }
+
     public void setId(Long id) {
         this.id = id;
     }
